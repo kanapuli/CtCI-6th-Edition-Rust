@@ -1,7 +1,11 @@
 use std::collections::HashMap;
-
+use std::io;
 fn main() {
-    let input = "Rustlangr";
+    let mut input = String::new();
+    io::stdin()
+        .read_line(&mut input)
+        .expect("Error: Please input a string");
+    let input = input.trim();
     let lowered_input = input.to_lowercase();
     let input_chars = lowered_input.chars().collect::<Vec<char>>();
     let mut unique_chars: HashMap<char, i16> = HashMap::new();
