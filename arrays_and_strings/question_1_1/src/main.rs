@@ -7,19 +7,38 @@ fn main() {
         .expect("Error: Please input a string");
     let input = input.trim();
     let lowered_input = input.to_lowercase();
-    let input_chars = lowered_input.chars().collect::<Vec<char>>();
+    if is_unique(lowered_input) {
+        println!("The string '{}' is unique", input);
+    } else {
+        println!("The string '{}' is not unique", input);
+    }
+}
+
+fn is_unique(input: String) -> bool {
+    let input_chars = input.chars().collect::<Vec<char>>();
     let mut unique_chars: HashMap<char, i16> = HashMap::new();
     for character in input_chars {
         let exists = unique_chars.contains_key(&character);
         if !exists {
             unique_chars.insert(character, 0);
         } else {
-            println!(
-                "The value {0} is duplicate and the string '{1}' is not unique",
-                character, input
-            );
-            return;
+            return false;
         }
     }
-    println!("The string '{}' is unique", input);
+    return true;
+}
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    #[test]
+    fn test_is_unique() {
+        //Positive assertions
+        assert_eq!(is_unique("nonunique".to_string()), false);
+        assert_eq!(is_unique("first".to_string()), true);
+        //Negative assertions
+        assert_ne!(is_unique("Testshouldpass".to_string()), true);
+        assert_ne!(is_unique("coding".to_string()), false);
+    }
 }
