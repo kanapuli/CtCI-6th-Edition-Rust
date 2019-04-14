@@ -12,7 +12,19 @@ fn main() {
     io::stdin()
         .read_line(&mut input_2)
         .expect("Invalid second string");
-    let result = check_permutation(input_1.trim(), input_2.trim());
+    if check_permutation(input_1.trim(), input_2.trim()) {
+        println!(
+            "The strings '{0}' is a permutation of '{1}'",
+            input_1.trim(),
+            input_2.trim()
+        );
+    } else {
+        println!(
+            "The strings '{0}' is different from '{1}' and permutation does not exist",
+            input_1.trim(),
+            input_2.trim()
+        );
+    }
 }
 
 fn check_permutation(input_1: &str, input_2: &str) -> bool {
@@ -33,6 +45,16 @@ fn check_permutation(input_1: &str, input_2: &str) -> bool {
         match input_2_map.get(&character) {
             None => input_2_map.insert(character, 1),
             Some(s) => input_2_map.insert(character, s + 1),
+        };
+    }
+    for (key, val) in input_1_map.iter() {
+        match input_2_map.get(&key) {
+            None => return false,
+            Some(v) => {
+                if v != val {
+                    return false;
+                }
+            }
         };
     }
     return true;
