@@ -59,3 +59,17 @@ fn check_permutation(input_1: &str, input_2: &str) -> bool {
     }
     return true;
 }
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+    #[test]
+    fn test_check_permutation() {
+        let result = check_permutation("dog", "gof");
+        assert_eq!(result, false);
+        let result = check_permutation("dog ", "dog");
+        assert_eq!(result, false);
+        let result = check_permutation("bag", "gab");
+        assert_eq!(result, true);
+    }
+}
