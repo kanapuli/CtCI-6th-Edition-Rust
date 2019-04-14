@@ -20,10 +20,20 @@ fn check_permutation(input_1: &str, input_2: &str) -> bool {
         return false;
     }
     let mut input_1_map: HashMap<char, i32> = HashMap::new();
+    let mut input_2_map: HashMap<char, i32> = HashMap::new();
     let input_1_chars: Vec<char> = input_1.chars().collect();
     let input_2_chars: Vec<char> = input_2.chars().collect();
     for character in input_1_chars {
-        //        input_1_chars.insert(character, 0);
+        match input_1_map.get(&character) {
+            None => input_1_map.insert(character, 1),
+            Some(s) => input_1_map.insert(character, s + 1),
+        };
+    }
+    for character in input_2_chars {
+        match input_2_map.get(&character) {
+            None => input_2_map.insert(character, 1),
+            Some(s) => input_2_map.insert(character, s + 1),
+        };
     }
     return true;
 }
