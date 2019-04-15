@@ -1,3 +1,4 @@
+// Task: Urlify-  replace spaces with %20
 use std::io;
 
 fn main() {
@@ -11,11 +12,12 @@ fn main() {
 fn replace_spaces(input: String) {
     let mut space_count = 0;
     let input_chars: Vec<char> = input.chars().collect();
-    println!("{:?}", input_chars);
     for character in input_chars {
         if character == ' ' {
             space_count += 1;
         }
     }
-    println!("{:?}", space_count);
+    let target_length = input.len() + space_count * 3;
+    let mut tmp_array: [char; target_length] = [' '; target_length];
+    println!("{:?}", tmp_array);
 }
